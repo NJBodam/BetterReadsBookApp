@@ -1,6 +1,6 @@
 package com.example.betterreadsdataloader;
 
-import connection.DataStaxAstraProperties;
+import com.example.betterreadsdataloader.connection.DataStaxAstraProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomizer;
@@ -11,10 +11,10 @@ import java.nio.file.Path;
 
 @SpringBootApplication
 @EnableConfigurationProperties(DataStaxAstraProperties.class)  // Configuration for the class property
-public class BetterreadsDataLoaderApplication {
+public class BetterReadsDataLoaderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BetterreadsDataLoaderApplication.class, args);
+        SpringApplication.run(BetterReadsDataLoaderApplication.class, args);
     }
 
     // This exposes the CQL Session Builder Customizer
