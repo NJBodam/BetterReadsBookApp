@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomi
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
 import java.nio.file.Path;
 
 @SpringBootApplication
@@ -16,6 +17,30 @@ public class BetterReadsDataLoaderApplication {
     public static void main(String[] args) {
         SpringApplication.run(BetterReadsDataLoaderApplication.class, args);
     }
+
+
+    // A method that runs when the application starts
+    @PostConstruct
+    public void start() {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // This exposes the CQL Session Builder Customizer
     // it used the astraProperties path to create a new CQL Session Buildder Customizer Bean
