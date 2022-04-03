@@ -1,5 +1,7 @@
 package com.example.betterreadsdataloader.author;
 
+import org.springframework.http.ResponseEntity;
+
 public interface AuthorService {
-    String createAuthor(Author author);
+    ResponseEntity<String> createAuthor(Admin admin);
 }
