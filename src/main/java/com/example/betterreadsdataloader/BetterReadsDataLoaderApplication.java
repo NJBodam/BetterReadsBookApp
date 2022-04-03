@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomi
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Lazy;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -26,6 +27,9 @@ import java.util.stream.Stream;
 @SpringBootApplication
 @EnableConfigurationProperties(DataStaxAstraProperties.class)  // Configuration for the class property
 public class BetterReadsDataLoaderApplication {
+
+    @Autowired
+    public AuthorServiceImpl authorService;
 
     @Value("${datadump.location.author}")
     private String authorDumpLocation;
@@ -41,22 +45,26 @@ public class BetterReadsDataLoaderApplication {
 
     private void initAuthors() {
         Path path = Paths.get(authorDumpLocation);
+        Path pathToFile = Paths.get(authorDumpLocation);
+        System.err.println(">>>>>>>>>>>>>>>>>>>" + pathToFile.toAbsolutePath());
         try (Stream<String> lines = Files.lines(path)){
             // Read and parse the line
             lines.forEach(line -> {
                 String jsonString = line.substring(line.indexOf("{"));
-                JSONObject jsonObject;
+                // Construct Author object
                 try {
-                    jsonObject = new JSONObject(jsonString);
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    Author author = new Author();
+                    author.setId(jsonObject.optString("key").replace("/authors/", ""));
+                    System.err.println(jsonObject.optString("key").replace("/authors/", ""));
+                    author.setName(jsonObject.optString("name"));
+                    System.err.println(jsonObject.optString("name"));
+                    author.setPersonalName(jsonObject.optString("personal_name", "name"));
+                    authorService.createAuthor(author);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Author author = new Author();
-              //  author.setId(jsonObject.optInt(""));
-                author.setName("Brown");
-                author.setPersonalName("DanBrown");
-                // Construct Author object
-                // Persist using Author Respository
+
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,15 +78,10 @@ public class BetterReadsDataLoaderApplication {
 
     @PostConstruct
     public void start() {
-        System.out.println(authorDumpLocation);
+        //System.out.println(authorDumpLocation);
+        initAuthors();
+    //    initWorks();
 
-
-//        AuthorServiceImpl authorService = new AuthorServiceImpl();
-//        Author author = new Author();
-//        author.setId("id");
-//        author.setName("Brown");
-//        author.setPersonalName("DanBrown");
-//        authorService.createAuthor(author);
     }
 
 

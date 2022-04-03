@@ -17,5 +17,4 @@ public class AuthorServiceImpl implements AuthorService {
         return "Author created";
     }
 
-
 }

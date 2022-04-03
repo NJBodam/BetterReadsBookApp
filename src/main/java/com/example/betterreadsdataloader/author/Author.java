@@ -45,4 +45,13 @@ public class Author {
     public void setPersonalName(String personalName) {
         this.personalName = personalName;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", personalName='" + personalName + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,7 @@
 spring.application.name: betterreads-data-loader
 
 datadump.location:
-  author: /Users/mac/Downloads/BetterReadsDataDump/test-authors.txt
+  author: /Users/mac/Downloads/test-authors.txt
   work: /Users/mac/Downloads/BetterReadsDataDump/test-works.txt
 
 spring:
