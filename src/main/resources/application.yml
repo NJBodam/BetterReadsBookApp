@@ -1,16 +1,16 @@
 spring.application.name: betterreads-data-loader
 
 datadump.location:
-  author: /Users/mac/Downloads/test-authors.txt
+  author: /Users/mac/Downloads/BetterReadsDataDump/test-authors.txt
   work: /Users/mac/Downloads/BetterReadsDataDump/test-works.txt
 
 spring:
   data:
     cassandra:
       keyspace-name: main
-      username: flavtWDtHhMGZYLqcIzLaKrE
-      password: MyFrJ.6,kWiKLDMwQDUZ6WfEOiKFvE-PHpOg0S0R3C9Rp,Bv6TbGPH3J.tBMCNz4Op9,-HCMtRJoFun1m-5LHW-DvQaH8ImMKav5AArP6Z,,-L+DhDIunD2jjjP.gz76
-      schema-action: recreate
+      username: ${CASSANDRA_USERNAME}
+      password: ${CASSANDRA_PASSWORD}
+      schema-action: create_if_not_exists
       request:
         timeout: 10s
       connection:
@@ -21,10 +21,10 @@ datastax.astra:
   secure-connect-bundle: secure-connect-betterreads.zip
 
 astra.db:
-  id: 1f59a1d3-bb0e-4897-a9d8-03c4c88a7be9-1
+  id: ${ASTRA_DB_ID}
   region: us-east1
   keyspace: main
-  application.token: AstraCS:flavtWDtHhMGZYLqcIzLaKrE:94e675d30e37be4886b4aacb8e09ea303c6adc9d25fd4266afe9e5f769d0cbec
+  application.token: ${ASTRA_DB_TOKEN}
 
 
 
